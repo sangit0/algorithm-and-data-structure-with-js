@@ -1,26 +1,26 @@
 class MinHeap {
-  store = [];
+  heap = [];
   constructor() {
-    this.store = [null];
+    this.heap = [null];
   }
 
   getMin() {
-    return this.store[1];
+    return this.heap[1];
   }
 
   insertNewElement(valueToInsert) {
-    this.store.push(valueToInsert); //new value to the end
+    this.heap.push(valueToInsert); //new value to the end
 
-    if (this.store.length > 1) {
-      let currentNode = this.store.length - 1;
+    if (this.heap.length > 1) {
+      let currentNode = this.heap.length - 1;
       while (
         currentNode > 1 &&
-        this.store[currentNode] < this.store[Math.floor(currentNode / 2)]
+        this.heap[currentNode] < this.heap[Math.floor(currentNode / 2)]
       ) {
         //swap
-        [this.store[Math.floor(currentNode / 2)], this.store[currentNode]] = [
-          this.store[currentNode],
-          this.store[Math.floor(currentNode / 2)],
+        [this.heap[Math.floor(currentNode / 2)], this.heap[currentNode]] = [
+          this.heap[currentNode],
+          this.heap[Math.floor(currentNode / 2)],
         ];
         currentNode = Math.floor(currentNode / 2);
       }
@@ -29,8 +29,8 @@ class MinHeap {
 
   remove() {
     const smallest = this.getMin();
-    this.store[1] = this.store[this.store.length - 1]; //replace first with last
-    this.store.splice(this.store.length - 1, 1); //remove last
+    this.heap[1] = this.heap[this.heap.length - 1]; //replace first with last
+    this.heap.splice(this.heap.length - 1, 1); //remove last
 
     //let heapify
 
@@ -38,30 +38,30 @@ class MinHeap {
     let leftChild = 2 * current;
     let rightChild = 2 * current + 1;
 
-    if (this.store.length > 2) {
+    if (this.heap.length > 2) {
 
       //for efficiency
-      if (this.store.length === 3) {
-        if (this.store[1] > this.store[2]) {
-          [this.store[1], this.store[2]] = [this.store[2], this.store[1]];
+      if (this.heap.length === 3) {
+        if (this.heap[1] > this.heap[2]) {
+          [this.heap[1], this.heap[2]] = [this.heap[2], this.heap[1]];
         }
         return smallest;
       }
 
       while (
-        this.store[current] > this.store[leftChild] ||
-        this.store[current] > this.store[rightChild]
+        this.heap[current] > this.heap[leftChild] ||
+        this.heap[current] > this.heap[rightChild]
       ) {
-        if (this.store[leftChild] > this.store[rightChild]) {
-          [this.store[current], this.store[rightChild]] = [
-            this.store[rightChild],
-            this.store[current],
+        if (this.heap[leftChild] > this.heap[rightChild]) {
+          [this.heap[current], this.heap[rightChild]] = [
+            this.heap[rightChild],
+            this.heap[current],
           ];
           current = rightChild;
         } else {
-          [this.store[current], this.store[leftChild]] = [
-            this.store[leftChild],
-            this.store[current],
+          [this.heap[current], this.heap[leftChild]] = [
+            this.heap[leftChild],
+            this.heap[current],
           ];
           current = leftChild;
         }
@@ -71,16 +71,16 @@ class MinHeap {
       }
 
       if (
-        this.store[rightChild] === undefined &&
-        this.store[leftChild] < this.store[current]
+        this.heap[rightChild] === undefined &&
+        this.heap[leftChild] < this.heap[current]
       ) {
-        [this.store[current], this.store[leftChild]] = [
-          this.store[leftChild],
-          this.store[current],
+        [this.heap[current], this.heap[leftChild]] = [
+          this.heap[leftChild],
+          this.heap[current],
         ];
       }
-    } else if (this.store.length === 2) {
-      this.store.splice(1, 1);
+    } else if (this.heap.length === 2) {
+      this.heap.splice(1, 1);
     } else {
       return null;
     }
@@ -90,13 +90,13 @@ class MinHeap {
 
   sort() {
     const sorted = [];
-    const temp = [...this.store]; // make a copy
+    const temp = [...this.heap]; // make a copy
 
-    while (this.store.length > 1) {
+    while (this.heap.length > 1) {
       sorted.push(this.remove());
     }
 
-    this.store = [...temp]; // paste the copy
+    this.heap = [...temp]; // paste the copy
 
     return sorted;
   }
@@ -110,4 +110,4 @@ minHeap.insertNewElement(4);
 minHeap.insertNewElement(1);
 
 console.log(minHeap.sort());
-console.log(minHeap.store);
+console.log(minHeap.heap);
