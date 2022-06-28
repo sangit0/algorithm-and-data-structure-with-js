@@ -30,7 +30,6 @@ class MinHeap {
   remove() {
     const smallest = this.getMin();
     this.heap[1] = this.heap[this.heap.length - 1]; //replace first with last
-    this.heap.splice(this.heap.length - 1, 1); //remove last
 
     //let heapify
 
@@ -39,6 +38,8 @@ class MinHeap {
     let rightChild = 2 * current + 1;
 
     if (this.heap.length > 2) {
+
+      this.heap.splice(this.heap.length - 1, 1); //remove last
 
       //for efficiency
       if (this.heap.length === 3) {
