@@ -18,7 +18,7 @@
             return level;
         }
 
-       return  Math.max(countLevel(node.left , level+1, countLevel(node.right , level+1))) 
+       return  Math.max(countLevel(node.left , level+1), countLevel(node.right , level+1)) 
     };
 };
 

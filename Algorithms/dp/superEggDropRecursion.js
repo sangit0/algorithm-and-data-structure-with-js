@@ -12,7 +12,7 @@
         let result = 0;
         
         if(n <= 1 || k === 1) {
-            return n;
+            return n; // for one egg and one floor need N number Of test
         }
         
         let left = 1;
@@ -24,7 +24,7 @@
             left = testEggDrop(mid- 1, k -1); //egg breaks
             right = testEggDrop(n-mid, k); //egg not breaks
 
-            result = Math.max(left, right) +1;
+            result = Math.max(left, right) + 1;
            
             if (left < right) {
                 left = mid + 1;

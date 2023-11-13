@@ -63,6 +63,10 @@ class Tree {
     }
   }
 
+  removeNodeFromBST(value){
+    
+  }
+
   inOrder(node) {
     if (node !== null) {
       this.inOrder(node.left);
